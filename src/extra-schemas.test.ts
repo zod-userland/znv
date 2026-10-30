@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vitest";
+
 import { parseEnv } from "./index.js";
 import { deprecate } from "./extra-schemas.js";
 

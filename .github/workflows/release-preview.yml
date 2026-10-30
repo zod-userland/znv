@@ -1,0 +1,32 @@
+name: Release preview
+
+# Not `pull_request_target`: fork PRs only get a read-only token, so they're skipped.
+on:
+  pull_request:
+    branches: [master]
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    name: Release preview
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: write # preview comment
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: bowlingx/super-release@dc83fde079beb5c662e5a1f413dabe80c95c1bd6 # super-release/v1.17.0
+        with:
+          preview: true
+          base: master

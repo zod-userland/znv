@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { z } from "zod";
 import { deprecate, parseEnv, port } from "./compat.js";
 

@@ -131,9 +131,7 @@ export function parseEnvImpl<T extends Schemas & RestrictSchemas<T>>(
   schemas: T,
   reporterOrTokenFormatters: Reporter | TokenFormatters,
 ): DeepReadonlyObject<ParsedSchema<T>> {
-  const parsed: Record<string, unknown> = {} as DeepReadonlyObject<
-    ParsedSchema<T>
-  >;
+  const parsed: Record<string, unknown> = {};
   const reporter =
     typeof reporterOrTokenFormatters === "function"
       ? reporterOrTokenFormatters
@@ -170,6 +168,7 @@ export function parseEnvImpl<T extends Schemas & RestrictSchemas<T>>(
           parsed[key] = getSchemaWithPreprocessor(schemaOrSpec).parse(envValue);
         }
       } else if (envValue == null) {
+        // oxlint-disable-next-line typescript/no-unsafe-assignment -- spec defaults are typed as `any`
         [defaultUsed, defaultValue] = resolveDefaultValueForSpec(
           schemaOrSpec.defaults,
           env["NODE_ENV"],

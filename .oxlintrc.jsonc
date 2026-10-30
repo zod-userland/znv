@@ -1,0 +1,74 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "eslint",
+    "typescript",
+    "unicorn",
+    "oxc",
+    "import",
+    "node",
+    "promise",
+    "vitest",
+  ],
+  // `style` and `restriction` are intentionally left out: they're collections
+  // of mutually exclusive conventions, not meant to be enabled wholesale.
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "pedantic": "warn",
+    "perf": "warn",
+  },
+  "options": {
+    "typeAware": true,
+  },
+  "env": {
+    "builtin": true,
+    "es2025": true,
+    "node": true,
+  },
+  "rules": {
+    // Not part of the presets above, carried over from the previous config.
+    "no-var": "error",
+    "prefer-const": "warn",
+    "no-labels": "error",
+    "no-new-func": "error",
+    "no-return-assign": "error",
+    "no-sequences": "error",
+    "import/no-duplicates": "warn",
+    "typescript/no-namespace": "error",
+
+    // `== null` is used deliberately to match both `null` and `undefined`.
+    "eqeqeq": ["warn", "always", { "null": "ignore" }],
+    // `_zod` is Zod's own internals property.
+    "no-underscore-dangle": ["warn", { "allow": ["_zod"] }],
+    // A `default` branch is an intentional catch-all.
+    "typescript/switch-exhaustiveness-check": [
+      "warn",
+      { "considerDefaultExhaustiveForUnions": true },
+    ],
+    // Narrowing Zod's internal types requires assertions.
+    "typescript/no-unsafe-type-assertion": "off",
+    // Idiomatic truthiness checks on `string | undefined`.
+    "typescript/strict-boolean-expressions": "off",
+    // Would require `readonly` on every parameter, including Zod types.
+    "typescript/prefer-readonly-parameter-types": "off",
+    // `Array#toSorted()` needs ES2023; the code already sorts a copy.
+    "unicorn/no-array-sort": "off",
+    // Public API: `parseEnv` defaults its formatters with an object literal.
+    "unicorn/no-object-as-default-parameter": "off",
+    "max-lines": "off",
+    "max-lines-per-function": "off",
+    "no-warning-comments": "off",
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.ts"],
+      "rules": {
+        // Tests deliberately pass `any` to exercise invalid input.
+        "typescript/no-unsafe-assignment": "off",
+        // Many tests only assert that parsing fails at all.
+        "vitest/require-to-throw-message": "off",
+      },
+    },
+  ],
+}

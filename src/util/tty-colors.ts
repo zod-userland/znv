@@ -22,7 +22,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/* eslint-disable @typescript-eslint/no-base-to-string */
+/* oxlint-disable typescript/no-base-to-string */
 
 import { isatty } from "tty";
 
@@ -76,7 +76,9 @@ const filterEmpty = (open: string, close: string) => (str: unknown) =>
     : "";
 
 const create = (open: number, close: number) =>
-  isColorSupported ? filterEmpty(`\x1b[${open}m`, `\x1b[${close}m`) : String;
+  isColorSupported
+    ? filterEmpty(`\u001B[${open}m`, `\u001B[${close}m`)
+    : String;
 
 export const red = create(31, 39);
 export const green = create(32, 39);

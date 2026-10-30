@@ -127,7 +127,7 @@ export function getPreprocessorByZodType(
         `Zod type not yet supported: "${def.type}" (PRs welcome)`,
       );
     default: {
-      assertNever(def);
+      return assertNever(def);
     }
   }
 }

@@ -90,7 +90,7 @@ export function reportErrors(
       const desc =
         meta?.description ??
         (schemas[key] && "description" in schemas[key]
-          ? // eslint-disable-next-line @typescript-eslint/no-deprecated
+          ? // oxlint-disable-next-line typescript/no-deprecated
             schemas[key].description
           : undefined);
       if (desc) {

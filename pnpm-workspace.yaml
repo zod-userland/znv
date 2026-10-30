@@ -1,0 +1,12 @@
+minimumReleaseAgeExclude:
+  - super-release-darwin-arm64@1.17.0
+  - super-release-darwin-x64@1.17.0
+  - super-release-linux-arm64@1.17.0
+  - super-release-linux-x64@1.17.0
+  - super-release-windows-x64@1.17.0
+  - super-release@1.19.0
+# Supply-chain hardening on top of pnpm's defaults (which already delay
+# installing versions younger than 1 day and block exotic transitive deps).
+# Fail the install if a package's publish trust level drops compared with its
+# earlier releases (e.g. a release suddenly published without provenance).
+trustPolicy: no-downgrade
