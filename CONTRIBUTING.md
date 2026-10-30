@@ -18,7 +18,7 @@
 - Ensure the PR description clearly describes the problem and solution. Include
   the relevant issue number if applicable.
 
-- Run `yarn test` before submitting the pull request to ensure tests, linting
+- Run `pnpm test` before submitting the pull request to ensure tests, linting
   and formatting pass without issues. These will also be checked in CI, so it
   can save you time later.
 

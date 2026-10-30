@@ -1,14 +1,14 @@
 type Input = string | undefined | null;
 
 export const number = (arg: Input) => {
-  if (typeof arg === "string" && /^-?\d+(\.\d+)?$/.test(arg)) {
+  if (typeof arg === "string" && /^-?\d+(\.\d+)?$/u.test(arg)) {
     return Number(arg);
   }
   return arg;
 };
 
 export const bigInt = (arg: Input) => {
-  if (typeof arg === "string" && /^-?\d+(\.\d+)?$/.test(arg)) {
+  if (typeof arg === "string" && /^-?\d+(\.\d+)?$/u.test(arg)) {
     return BigInt(arg);
   }
   return arg;
@@ -36,7 +36,6 @@ export const identity = (arg: Input) => arg;
 // for now, this hedge seems to work fine, but it might be worth revisiting.
 export const boolean = (arg: Input) => {
   if (typeof arg === "string") {
-    // eslint-disable-next-line default-case
     switch (arg) {
       case "true":
       case "yes":
@@ -60,7 +59,7 @@ export const json = (arg: Input) => {
   // "expected x, got string"). in the future `getPreprocessor` could
   // maybe be refined to return a result type instead, but let's not
   // overengineer things for now.
-  return JSON.parse(arg);
+  return JSON.parse(arg) as unknown;
 };
 
 export const date = (arg: Input) => {

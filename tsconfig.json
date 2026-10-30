@@ -4,6 +4,9 @@
     "lib": [
       "ES2022"
     ],
+    "types": [
+      "node"
+    ],
     "module": "node18",
     "moduleResolution": "node16",
     "outDir": "dist",

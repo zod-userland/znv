@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=./node_modules/super-release/config-schema.json
+
+branches:
+  - master
+  - name: beta
+    prerelease: beta
+
+tag_format: "v{version}"
+
+steps:
+  - name: changelog
+  - name: npm
+    options:
+      staged: true
+      provenance: true
+  - name: github
+
+git:
+  commit_message: "chore(release): {releases} [skip ci]"
+  push: true
