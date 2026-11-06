@@ -26,7 +26,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
           persist-credentials: false
-      - uses: bowlingx/super-release@dc83fde079beb5c662e5a1f413dabe80c95c1bd6 # super-release/v1.17.0
+      - uses: bowlingx/super-release@8c77371be1d5449735a4e403bff1bd01219df0cb # super-release/v1.19.0
         with:
           preview: true
           base: master
